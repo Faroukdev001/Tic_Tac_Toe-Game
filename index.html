@@ -8,6 +8,10 @@
     <link rel="manifest" href="manifest.json">
 </head>
 <body>
+    <div id="scoreboard">
+        <span id="player-x-score">Player X: 0</span>
+        <span id="player-o-score">Player O: 0</span>
+    </div>
     <h1>Tic Tac Toe</h1>
     <div id="board">
         <div data-index="1" class="tile right-border bottom-border"></div>
@@ -22,6 +26,7 @@
         <div id="strike" class="strike"></div>
     </div>
     <div id="game-over-area" class="hidden">
+        <p id="overall-winner" class="hidden">Overall Winner: Player X</p>
         <h2 id="game-over-text">Winner is X</h2>
         <button id="play-again">Play Again</button>
     </div>

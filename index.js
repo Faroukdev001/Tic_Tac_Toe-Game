@@ -2,6 +2,12 @@ const tiles = document.querySelectorAll(".tile");
 const PLAYER_X = 'X';
 const PLAYER_O = "O";
 let turn = PLAYER_X;
+let playerXScore = 0;
+let playerOScore = 0;
+let totalRounds = 0;
+let playerXRoundWins = 0;
+let playerORoundWins = 0;
+
 
 const boardState = Array(tiles.length);
 boardState.fill(null);
@@ -12,6 +18,10 @@ const gameOverArea = document.getElementById("game-over-area");
 const gameOverText = document.getElementById("game-over-text");
 const playAgain = document.getElementById("play-again");
 playAgain.addEventListener("click", startNewGame);
+
+const scoreboard = document.getElementById("scoreboard");
+const playerXScoreElement = document.getElementById("player-x-score");
+const playerOScoreElement = document.getElementById("player-o-score");
 
 //Sounds
 const gameOverSound = new Audio("sounds/game_over.wav");
@@ -92,10 +102,25 @@ function gameOverScreen(winnerText) {
     let text = 'Draw!';
     if(winnerText != null) {
         text = `Winner is ${winnerText}!`;
+        updateScore(winnerText);
     }
     gameOverArea.className = "visible";
     gameOverText.innerText = text;
     gameOverSound.play();
+}
+
+function updateScore(winner) {
+    if (winner === PLAYER_X) {
+        playerXScore++;
+    } else if (winner === PLAYER_O) {
+        playerOScore++;
+    }
+    updateScoreboard();
+}
+
+function updateScoreboard() {
+    playerXScoreElement.textContent = `Player X: ${playerXScore}`;
+    playerOScoreElement.textContent = `Player O: ${playerOScore}`;
 }
 
 function startNewGame() {
@@ -105,6 +130,46 @@ function startNewGame() {
     tiles.forEach((tile) => (tile.innerText = ""));
     turn = PLAYER_X;
     setHoverText();
+
+    totalRounds++;
+    if (totalRounds > 0 && totalRounds % 5 === 0) {
+        determineOverallWinner();
+    }
+}
+
+function determineOverallWinner() {
+    if (playerXScore > playerOScore) {
+        overallWinner = PLAYER_X;
+    } else if (playerOScore > playerXScore) {
+        overallWinner = PLAYER_O;
+    } else {
+        overallWinner = null; // Draw
+    }
+
+    showOverallWinner();
+}
+
+const overallWinnerElement = document.getElementById("overall-winner");
+
+function showOverallWinner() {
+    if (overallWinner !== null) {
+        const text = `Overall Winner is ${overallWinner}!`;
+        overallWinnerElement.textContent = text;
+        overallWinnerElement.classList.remove("hidden");
+        gameOverArea.className = "visible";
+        gameOverText.innerText = text;
+        gameOverSound.play();
+        resetScores();
+    } else {
+        resetScores();
+    }
+}
+
+function resetScores() {
+    totalRounds = 0;
+    playerXScore = 0;
+    playerOScore = 0;
+    updateScoreboard();
 }
 
 
