@@ -137,6 +137,8 @@ function startNewGame() {
     }
 }
 
+
+
 function determineOverallWinner() {
     if (playerXScore > playerOScore) {
         overallWinner = PLAYER_X;

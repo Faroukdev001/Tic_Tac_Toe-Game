@@ -89,6 +89,8 @@ body {
     transform: skewY(-45deg);
 }
 
+
+
 #scoreboard {
     position: absolute;
     top: 10px;
@@ -103,7 +105,6 @@ body {
 #player-o-score {
     margin-bottom: 5px;
 }
-
 
 
 h1 {
