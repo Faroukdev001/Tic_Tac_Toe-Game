@@ -93,3 +93,43 @@ body {
 h1 {
     color: greenyellow;
 }
+
+#game-over-area {
+    text-align: center;
+    border: indigo 8px solid;
+    padding: 50px;
+    width: 50%;
+    margin-top: 50px;
+}
+
+h2 {
+    color: greenyellow;
+    font-size: 2em;
+    margin-top: 0px;
+}
+
+button {
+    background-color: transparent;
+    color: greenyellow;
+    border: greenyellow 1px solid;
+    padding: 10px;
+    font-size: 1.5em;
+}
+
+.hidden {
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.x-hover:hover::after {
+    content: "X";
+    opacity: 0.4;
+}
+
+.o-hover:hover::after {
+    content: "O";
+    opacity: 0.4;
+}
